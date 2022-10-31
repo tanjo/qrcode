@@ -1,7 +1,8 @@
-# QR Code
+# QR Code Reader
 
-## Require
+## Requires
 
+- Camera
 - Python 3
 - OpenCV
 - Numpy
@@ -11,5 +12,6 @@
 ```sh
 pipenv install
 pipenv shell
+
 python main.py
 ```

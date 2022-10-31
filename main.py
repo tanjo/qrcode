@@ -1,5 +1,9 @@
+import warnings
 import numpy as np
 import cv2 as cv
+import re
+import webbrowser
+from pyzbar.pyzbar import decode
 
 font = cv.FONT_HERSHEY_SIMPLEX
 
@@ -16,6 +20,7 @@ def getCamera(num):
 
 global_dec_inf = None
 def readQRCode(frame):
+  warnings.warn("deprecated", DeprecationWarning)
   qrImg = frame
   qrd = cv.QRCodeDetector()
 
@@ -44,6 +49,8 @@ def main():
   if cap == None:
     exit()
 
+  oldResultData = None
+
   while True:
     ret, frame = cap.read()
 
@@ -51,11 +58,18 @@ def main():
       print("Can't receive frame (stream end?). Exiting ...")
       break
 
-    qrImg = readQRCode(frame)
+    result = decode(frame)
 
-    # gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    if result != []:
+      resultData = result[0].data.decode('utf8')
+      if oldResultData != resultData:
+        oldResultData = resultData
+        print(resultData)
+        if re.match("https?://[\w/:%#\$&\?\(\)~\.=\+\-]+", resultData):
+          webbrowser.open(resultData, new=0, autoraise=True)
+          break
 
-    cv.imshow('frame', qrImg)
+    cv.imshow('frame', frame)
     if cv.waitKey(1) == ord('q'):
       break
 
