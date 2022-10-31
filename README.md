@@ -6,6 +6,7 @@
 - Python 3
 - OpenCV
 - Numpy
+- pyzbar
 
 ## Run
 
