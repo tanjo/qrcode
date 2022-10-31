@@ -1,12 +1,15 @@
 # QR Code
 
+## Require
+
+- Python 3
+- OpenCV
+- Numpy
+
 ## Run
+
 ```sh
-node index.js https://www.google.com/
+pipenv install
+pipenv shell
+python main.py
 ```
-
-## Result
-![](./result/https___www_google_com_.png)
-
-## Using
-- [qr-image](https://www.npmjs.com/package/qr-image)
