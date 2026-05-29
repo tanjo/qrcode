@@ -1,5 +1,6 @@
 import jsQR from 'jsqr'
 import './style.css'
+import { addQrHistoryEntry } from './history-store'
 
 document.querySelector('#app').innerHTML = `
   <main class="shell">
@@ -38,6 +39,7 @@ document.querySelector('#app').innerHTML = `
 
     <footer class="page-footer" aria-label="ページ移動">
       <a class="footer-link" href="./generator.html">QR生成ページへ移動</a>
+      <a class="footer-link" href="./history.html">履歴ページへ移動</a>
     </footer>
   </main>
 `
@@ -122,6 +124,19 @@ const loadImageFromBlob = (blob) => {
   })
 }
 
+const blobToDataUrl = (blob) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => {
+      resolve(typeof reader.result === 'string' ? reader.result : '')
+    }
+    reader.onerror = () => {
+      reject(new Error('画像データの保存準備に失敗しました。'))
+    }
+    reader.readAsDataURL(blob)
+  })
+}
+
 const processBlob = async (blob) => {
   if (!blob) {
     setStatus('画像データが見つかりませんでした。', 'error')
@@ -140,7 +155,13 @@ const processBlob = async (blob) => {
       return
     }
 
+    const originalImageDataUrl = await blobToDataUrl(blob)
     setResult(decodedText)
+    addQrHistoryEntry({
+      type: 'read',
+      text: decodedText,
+      imageDataUrl: originalImageDataUrl,
+    })
     setStatus('QRコードを読み取りました。', 'success')
   } catch (error) {
     setResult('')

@@ -1,5 +1,6 @@
 import QRCode from "qrcode";
 import "./generator.css";
+import { addQrHistoryEntry } from "./history-store";
 
 document.querySelector("#generator-app").innerHTML = `
   <main class="generator-shell">
@@ -50,6 +51,7 @@ document.querySelector("#generator-app").innerHTML = `
 
     <footer class="page-footer" aria-label="ページ移動">
       <a class="footer-link" href="./index.html">QR読み取りページへ移動</a>
+      <a class="footer-link" href="./history.html">履歴ページへ移動</a>
     </footer>
   </main>
 
@@ -117,6 +119,19 @@ const renderQrCode = async () => {
     qrImage.hidden = false;
     overlayQrImage.src = dataUrl;
     downloadButton.disabled = false;
+    addQrHistoryEntry({
+      type: "generate",
+      text,
+      qrOptions: {
+        width,
+        margin,
+        errorCorrectionLevel: ecLevel.value,
+        color: {
+          dark: "#112236",
+          light: "#f7f7f2",
+        },
+      },
+    });
     setStatus("QRコードを生成しました。", "success");
   } catch (error) {
     clearGeneratedPreview();

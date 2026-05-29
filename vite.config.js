@@ -10,6 +10,7 @@ export default defineConfig({
         main: resolve(__dirname, "index.html"),
         generator: resolve(__dirname, "generator.html"),
         generate: resolve(__dirname, "generate.html"),
+        history: resolve(__dirname, "history.html"),
       },
     },
   },
