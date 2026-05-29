@@ -1,18 +1,39 @@
-# QR Code Reader
+# QR Code Reader (Vite)
 
-## Requires
+画像アップロード・ドラッグ&ドロップ・クリップボード貼り付けで QR コードを読み取るツールです。
 
-- Camera
-- Python 3
-- OpenCV
-- Numpy
-- pyzbar
+## 機能
 
-## Run
+- 画像ファイル選択 (`image/*`)
+- 画像のドラッグ&ドロップ
+- 貼り付け (`Ctrl+V` / `Cmd+V`) での画像取り込み
+- クリップボード API (`navigator.clipboard.read`) からの画像取得
+- 読み取り結果のコピー
 
-```sh
-pipenv install
-pipenv shell
+## 使い方
 
-python main.py
+```bash
+npm install
+npm run dev
 ```
+
+ブラウザで表示されたページに対して、次のいずれかで読み取りできます。
+
+1. 「画像を選択」から QR 画像を選ぶ
+2. 画像をドロップエリアへドラッグ&ドロップ
+3. 画像をクリップボードにコピーして貼り付け
+4. 「クリップボード画像を読み込む」を押す（対応ブラウザのみ）
+
+## 技術メモ
+
+- デコード処理は `BarcodeDetector`（対応時）を優先
+- 非対応時は `jsQR` にフォールバック
+
+## ライブラリ
+
+- [cozmo/jsQR](https://github.com/cozmo/jsqr)
+
+## CHANGELOG
+
+### 2026.05.29
+- Python やめて Node.js で書き直し
