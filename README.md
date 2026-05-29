@@ -1,4 +1,4 @@
-# QR Code Reader (Vite)
+# QR Code Reader
 
 画像アップロード・ドラッグ&ドロップ・クリップボード貼り付けで QR コードを読み取るツールです。
 
