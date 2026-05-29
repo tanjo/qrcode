@@ -205,6 +205,31 @@ h2 {
   color: #2f2d2a;
 }
 
+.page-footer {
+  margin-top: 2px;
+  padding: 10px 0 2px;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-link {
+  display: inline-block;
+  padding: 10px 16px;
+  border: 1px solid #c7b295;
+  border-radius: 999px;
+  color: var(--ink);
+  background: linear-gradient(180deg, #fffdf8 0%, #f9f0e3 100%);
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 6px 14px rgb(24 35 15 / 0.08);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.footer-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgb(24 35 15 / 0.12);
+}
+
 @keyframes rise-in {
   from {
     opacity: 0;

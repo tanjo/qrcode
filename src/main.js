@@ -35,6 +35,10 @@ document.querySelector('#app').innerHTML = `
       </div>
       <textarea id="result" class="result" readonly placeholder="QRコードを読み取ると内容が表示されます"></textarea>
     </section>
+
+    <footer class="page-footer" aria-label="ページ移動">
+      <a class="footer-link" href="./generator.html">QR生成ページへ移動</a>
+    </footer>
   </main>
 `
 
